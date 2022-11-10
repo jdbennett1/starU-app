@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+<br />
+
+<body style="background-color:#C2C2C2;"></body>
+<div class="jumbotron">
+    <h1 class="display-4">Star U</h1>
+    <p class="lead">A Reviewing website to know where you stand among the rest.</p>
+    <p class="lead"> Start by clicking on "View All Profiles" or using the Search Bar above to find someone Specific</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}" role="button">View All Profiles</a>
+    </p>
+</div>
+{% endblock content %}
