@@ -1,10 +1,13 @@
 from django.urls import path
+
 from .views import (
     ArticleListView,
     ArticleUpdateView,
     ArticleDetailView,
     ArticleDeleteView,
-    ArticleCreateView,  # new
+    ArticleCreateView,
+    rate,
+    index,  # new
 )
 
 urlpatterns = [
@@ -13,4 +16,6 @@ urlpatterns = [
     path("<int:pk>/delete/", ArticleDeleteView.as_view(), name="article_delete"),
     path("new/", ArticleCreateView.as_view(), name="article_new"),  # new
     path("", ArticleListView.as_view(), name="article_list"),
-]
+    path('rate/<int:post_id>/<int:rating>/', rate),
+    path('', index),
+] 
