@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
+
 from django.db import models
 from django.urls import reverse
 from django.db.models import Avg
@@ -14,7 +15,7 @@ class Article(models.Model):
         on_delete=models.CASCADE,
     )
     def average_rating(self) -> float:
-        return Rating.objects.filter(Article=self).aggregate(Avg("rating"))["rating__avg"] or 0
+        return Rating.objects.filter(article=self).aggregate(Avg("rating"))["rating__avg"] or 0
 
     def __str__(self):
         return f"{self.title}: {self.average_rating()}"
@@ -24,6 +25,14 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         return reverse("article_detail", args=[str(self.id)])
+
+class Rating(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    post = models.ForeignKey(Article, on_delete=models.CASCADE)
+    rating = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.post.title}: {self.rating}"
 
 
 class Comment(models.Model):
@@ -44,10 +53,3 @@ class Comment(models.Model):
     def get_absolute_url(self):
         return reverse("article_list")
 
-class Rating(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    post = models.ForeignKey(Article, on_delete=models.CASCADE)
-    rating = models.IntegerField(default=0)
-
-    def __str__(self):
-        return f"{self.post.title}: {self.rating}"

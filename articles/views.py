@@ -55,15 +55,15 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-def index(request) -> HttpResponse:
-    posts = Article.objects.all()
-    for post in posts:
-        rating = Rating.objects.filter(post=post, user=request.user).first()
-        post.user_rating = rating.rating if rating else 0
-    return render(request, "index.html", {"posts": posts})
+def index(request: HttpRequest) -> HttpResponse:
+    articles = Article.objects.all()
+    for article in articles:
+        rating = Rating.objects.filter(article=article, user=request.user).first()
+        article.user_rating = rating.rating if rating else 0
+    return render(request, "templates/article_list.html", {"articles": articles})
 
-def rate(request: HttpRequest, post_id: int, rating: int) -> HttpResponse:
-    post = Article.objects.get(id=post_id)
-    Rating.objects.filter(post=post, user=request.user).delete()
-    post.rating_set.create(user=request.user, rating=rating)
+def rate(request: HttpRequest, article_id: int, rating: int) -> HttpResponse:
+    article = Article.objects.get(id=article_id)
+    Rating.objects.filter(article=article, user=request.user).delete()
+    article.rating_set.create(user=request.user, rating=rating)
     return index(request)
