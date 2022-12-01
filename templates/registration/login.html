@@ -2,13 +2,13 @@
 {% block title %}Log In{% endblock title %}
 {% block content %}
 
-<body style="background-color:#C2C2C2;"></body>
-<h2>Log In</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <p>If you do not have an account then click here to <a href="{% url 'signup' %}">Sign Up</a>
-    </p>
-    <button class="btn btn-success ml-2" type="submit">Log In</button>
-</form>
-{% endblock content %}
+<body style="background-image: linear-gradient(to bottom right, rgb(98, 96, 113), rgb(89, 144, 164));">
+    <h2>Log In</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p>If you do not have an account then click here to <a href="{% url 'signup' %}">Sign Up</a>
+        </p>
+        <button class="btn btn-success ml-2" type="submit">Log In</button>
+    </form>
+    {% endblock content %}

@@ -42,13 +42,13 @@
     <div class="container mt-5 mb-3">
         <div class="row">
             <div class="col-md-4 bg-dark">
-                <div class="card p-3 mb-2 bg-info">
+                <div class="card p-3 mb-2 bg-warning">
 
                     <div class="d-flex flex-row align-items-center">
 
                         <div class="ms-2 c-details">
-                            <h2><span class="font-weight-bold">{{ article.author }} ()</span> &middot;</h2>
-                            <h3> <span class="text-muted"> {{ article.title }} </span></h3>
+                            <h2><span class="font-weight-bold">{{ article.title }} </span> &middot;</h2>
+
                             <h5 class="card-title">Avg rating:
                                 <span class="fa fa-star {% if article.average_rating > 0 %} checked {% endif %}"></span>
                                 <span class="fa fa-star {% if article.average_rating > 1 %} checked {% endif %}"></span>
@@ -56,64 +56,58 @@
                                 <span class="fa fa-star {% if article.average_rating > 3 %} checked {% endif %}"></span>
                                 <span class="fa fa-star {% if article.average_rating > 4 %} checked {% endif %}"></span>
                             </h5>
-                            <ul class="btn btn-light list-inline rating-list">
-                                <li onclick="rate(5, article.id )">
-                                    <i class="fa fa-star {% if article.user_rating > 4 %} checked {% endif %}"
-                                        title="Rate 5"></i>
-                                </li>
-                                <li onclick="rate(4)">
-                                    <i class="fa fa-star {% if article.user_rating > 3 %} checked {% endif %}"
-                                        title="Rate 4"></i>
-                                </li>
-                                <li onclick="rate(3)">
-                                    <i class="fa fa-star {% if article.user_rating > 2 %} checked {% endif %}"
-                                        title="Rate 3"></i>
-                                </li>
-                                <li onclick="rate(2)">
-                                    <i class="fa fa-star {% if article.user_rating > 1 %} checked {% endif %}"
-                                        title="Rate 2"></i>
-                                </li>
-                                <li onclick="rate(1)">
-                                    <i class="fa fa-star {% if article.user_rating > 0 %} checked {% endif %}"
-                                        title="Rate 1"></i>
-                                </li>
-                            </ul>
+                            <form class="review-form" method="GET" action="review">Review This Person
+                                <input type="hidden" name="article_id" id="article_id" value="{{article.id}}" />
+                                <div class="form-group">
+                                    <textarea class="input" type="text" name="comment"
+                                        placeholder="Your Review"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input rating">
+                                        <p class="text-uppercase font-weight-bold">Your Rating: </p>
+                                        <div class="rating-wrapper">
+                                            <ul class="btn btn-light list-inline rating-list">
+                                                <input type="radio" id="star-1" name="rate" value="1" /><label
+                                                    for="star-1" class="fa fa-star"></label>
+                                                <input type="radio" id="star-2" name="rate" value="2" /><label
+                                                    for="star-2" class="fa fa-star"></label>
+                                                <input type="radio" id="star-3" name="rate" value="3" /><label
+                                                    for="star-3" class="fa fa-star"></label>
+                                                <input type="radio" id="star-4" name="rate" value="4" /><label
+                                                    for="star-4" class="fa fa-star"></label>
+                                                <input type="radio" id="star-5" name="rate" value="5" /><label
+                                                    for="star-5" class="fa fa-star"></label>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-danger btn-md m-0" type="submit">Post</button>
+                            </form>
+
                         </div>
                     </div>
+                    <div class="mt-5">
+                        <div class="card-body">
+                            <!-- Changes start here! -->
+                            <p></p>
+                            <a href="{% url 'article_edit' article.pk %}">Edit</a> |
+                            <a href="{% url 'article_delete' article.pk %}">Delete</a> |
+                            <a href="{% url 'article_new' %}">Reviews</a>
 
-                </div>
-                <div class="mt-5">
-                    <div class="card-body">
-                        <!-- Changes start here! -->
-                        <p></p>
-                        <a href="{% url 'article_edit' article.pk %}">Edit</a> |
-                        <a href="{% url 'article_delete' article.pk %}">Delete</a> |
-                        <a href="{% url 'article_new' %}">Add
-                            Review</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                        <a href="#"> Reviews</a>
+                        </div>
                     </div>
                 </div>
+
             </div>
-            {% endfor %}
-            {% endblock content %}
 
-            <script>
-                const rate = (rating, article_id) => {
-                    fetch(`https://github.com/jdbennett1/starU-app/blob/main/articles/views.py/rate/${article_id}/${rating}/`, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    }).then(rest => {
-                        window.location.reload();
-                        // you may want to update the rating here
-                        // to simplify stuff, I just reload the page
-                    })
-                }
-            </script>
+        </div>
+        {% endfor %}
+        {% endblock content %}
 
 
-            <!--<div class="card">
+
+
+        <!--<div class="card">
             <div class="card-header">
                 <span class="font-weight-bold">{{ article.title }}</span> &middot;
                 <span class="text-muted">by {{ article.author }}
@@ -131,7 +125,7 @@
                 {% endfor %}
             </div>
              -->
-        </div>
+
     </div>
 </body>
 

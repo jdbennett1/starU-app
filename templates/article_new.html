@@ -1,10 +1,116 @@
 {% extends 'base.html' %}
-{% block content %}
 
-<body style="background-color:#C2C2C2;"></body>
-<h1>New Profile Review</h1>
-<form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-success ml-2" type="submit">Save</button>
-</form>
-{% endblock content %}
+{% block title %}Articles{% endblock title %}
+{% block content %}
+{% for article in object_list %}
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <title>Rating</title>
+</head>
+
+<body style="background-image: linear-gradient(to bottom right, rgb(98, 96, 113), rgb(89, 144, 164));">
+    <style>
+        .rating-list li {
+            float: right;
+            color: #ddd;
+            padding: 10px 5px;
+        }
+
+        .rating-list li:hover,
+        .rating-list li:hover~li {
+            color: orange;
+        }
+
+        .rating-list {
+            display: inline-block;
+            list-style: none;
+        }
+
+        .checked {
+            color: orange;
+        }
+    </style>
+
+    <div class="container mt-5 mb-3">
+        <div class="row">
+            <div class="col-md-4 bg-dark">
+                <div class="card p-3 mb-2 bg-warning">
+
+                    <div class="d-flex flex-row align-items-center">
+
+                        <div class="ms-2 c-details">
+                            <h2><span class="font-weight-bold">{{ article.title }} </span> &middot;</h2>
+                            <h3> <span class="text-muted"> </span></h3>
+                            <h5 class="card-title">Avg rating:
+                                <span class="fa fa-star {% if article.average_rating > 0 %} checked {% endif %}"></span>
+                                <span class="fa fa-star {% if article.average_rating > 1 %} checked {% endif %}"></span>
+                                <span class="fa fa-star {% if article.average_rating > 2 %} checked {% endif %}"></span>
+                                <span class="fa fa-star {% if article.average_rating > 3 %} checked {% endif %}"></span>
+                                <span class="fa fa-star {% if article.average_rating > 4 %} checked {% endif %}"></span>
+                            </h5>
+
+                            <div class="card-footer">
+                                {% for review in article.reviews.all %}
+                                <p>
+                                    <span class="font-weight-bold">
+                                        {{review.author}}&middot;{{ review.rate }} Stars &middot;
+                                    </span>
+                                    {{ review.comment }}
+                                    {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <!-- Changes start here! -->
+                        <p></p>
+                        <a href="{% url 'article_edit' article.pk %}">Edit</a> |
+                        <a href="{% url 'article_delete' article.pk %}">Delete</a> |
+                        <a href="{% url 'article_list' %}">Back to Profiles</a>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+        {% endblock content %}
+
+
+
+        <!--<div class="card">
+            <div class="card-header">
+                <span class="font-weight-bold">{{ article.title }}</span> &middot;
+                <span class="text-muted">by {{ article.author }}
+                    | {{ article.date }}</span>
+            </div>
+            >
+            <div class="card-footer">
+                {% for comment in article.comments.all %}
+                <p>
+                    <span class="font-weight-bold">
+                        {{ comment.author }} &middot;
+                    </span>
+                    {{ comment }}
+                </p>
+                {% endfor %}
+            </div>
+             -->
+
+    </div>
+</body>
+
+</html>
+<br />

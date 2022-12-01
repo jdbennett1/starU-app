@@ -14,25 +14,12 @@ class Article(models.Model):
         get_user_model(),
         on_delete=models.CASCADE,
     )
-    def average_rating(self) -> float:
-        return Rating.objects.filter(article=self).aggregate(Avg("rating"))["rating__avg"] or 0
 
     def __str__(self):
-        return f"{self.title}: {self.average_rating()}"
-
-   # def __str__(self):
-    #    return self.title
+        return self.title
 
     def get_absolute_url(self):
         return reverse("article_detail", args=[str(self.id)])
-
-class Rating(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    post = models.ForeignKey(Article, on_delete=models.CASCADE)
-    rating = models.IntegerField(default=0)
-
-    def __str__(self):
-        return f"{self.post.title}: {self.rating}"
 
 
 class Comment(models.Model):
@@ -52,4 +39,22 @@ class Comment(models.Model):
 
     def get_absolute_url(self):
         return reverse("article_list")
+
+    
+class Review(models.Model):
+    article = models.ForeignKey(
+        Article,
+        on_delete=models.CASCADE,
+        related_name="reviews" # new
+    )
+    author = models.ForeignKey(get_user_model(),models.CASCADE,null=True)
+    comment = models.TextField(max_length = 250)
+    rate = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.id)
+
+    def get_absolute_url(self):
+        return reverse('article_list')
 

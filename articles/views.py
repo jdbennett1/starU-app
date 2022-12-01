@@ -3,8 +3,9 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from .models import Article
-from .models import Rating
-from django.shortcuts import render
+
+from .models import Review
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.http import HttpRequest
 
@@ -42,13 +43,11 @@ class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):  #
         return obj.author == self.request.user
 
 
-class ArticleCreateView(LoginRequiredMixin, CreateView):
+class ArticleCreateView(LoginRequiredMixin, ListView):
     model = Article
     template_name = "article_new.html"
-    fields = (
-        "title",
-        "body",
-    )
+    
+    
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -67,3 +66,13 @@ def rate(request: HttpRequest, article_id: int, rating: int) -> HttpResponse:
     Rating.objects.filter(article=article, user=request.user).delete()
     article.rating_set.create(user=request.user, rating=rating)
     return index(request)
+
+def Review_rate(request):
+    if request.method == "GET":
+        article_id = request.GET.get('article_id')
+        comment = request.GET.get('comment')
+        rate = request.GET.get('rate')
+        author = request.GET.get('author')
+        Review(article_id=article_id,author=author,comment=comment,rate=rate).save()
+        return redirect('article_new')
+   
