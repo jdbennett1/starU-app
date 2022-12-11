@@ -28,6 +28,7 @@ urlpatterns = [
     path("articles/", include("articles.urls")),  # new
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
+    path("", TemplateView.as_view(template_name="about.html"), name="about"),
     path("", include("pages.urls")),  # new
    
 ]

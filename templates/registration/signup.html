@@ -1,6 +1,6 @@
 <!-- templates/signup.html -->
 
-<body style="background-image: linear-gradient(to bottom right, rgb(50, 168, 157), rgb(89, 144, 164));"></body>
+
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block title %}Sign Up{% endblock title%}
@@ -15,3 +15,39 @@
 
 </form>
 {% endblock content %}
+<style>
+    body {
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        height: 100vh;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>
+<div class="d-flex flex-column justify-content-center w-100 h-100">
+
+    <div class="d-flex flex-column justify-content-center align-items-center">
+
+        <div class="btn-group my-5">
+            <a
+                href="https://codepen-api-export-production.s3.us-west-2.amazonaws.com/zip/PEN/pyBNzX/1578778289271/pure-css-gradient-background-animation.zip"></a>
+
+
+
+            </a>
+
+        </div>
+    </div>

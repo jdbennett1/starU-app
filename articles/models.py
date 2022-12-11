@@ -61,8 +61,7 @@ class Review(models.Model):
     def get_absolute_url(self):
         return reverse('article_new', args=[str(self.id)])
 
-    @property
-    def avg(self,author1):
-        average = Review.objects.aggregate(Avg('rate'))
-        return average
+   
+    def avg_ratings(self):
+        return self.rate.aggregate(Avg('rate'))
 

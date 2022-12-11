@@ -1,0 +1,32 @@
+<body background="https://raw.githubusercontent.com/jdbennett1/starU-app/main/cool-background%20(1).png">
+    {% extends 'base.html' %}
+    {% block title %}Home{% endblock title %}
+
+    {% block content %}
+    <br />
+    <style>
+        h1 {
+            text-shadow: 2px 2px 5px red;
+        }
+    </style>
+
+
+    <!--<div class="jumbotron">-->
+    <h1 class="display-4">About Star U</h1>
+    <p class="lead">&middot;&nbsp;Star U is an App where you can rate the people that also use this app. A person's
+        profile
+        will show up and allow you to rate them from 1-5 and leave some comments on why you did so. </p>
+    <p class="lead">&middot;&nbsp; You can return to the home page or get started by viewing all the profiles that pop
+        up.
+    </p>
+    <p class="lead">&middot;&nbsp; You will start by signing up and logging in then you are free to use Star U. </p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'home' %}" role="button">Return Home</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}" role="button">View All Profiles</a>
+    </p>
+    <!--</div>-->
+
+    {% endblock content %}
+</body>
+
+<!--"background-color:#C2C2C2;"-->

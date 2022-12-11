@@ -30,6 +30,7 @@
             mb-md-0">
                         {% if user.is_authenticated %}
                         <li><a href="{% url 'article_create' %}" class="nav-link px-2 link-light">Create Profile</a>
+                        <li><a href="{% url 'about' %}" class="nav-link px-2 link-light">About the App</a></li>
                         </li>
                         <!--{% url 'article_new' %}-->
                     </ul>
@@ -45,7 +46,7 @@
                         </ul>
                     </div>
                     {% else %}
-                    <li><a href="#" class="nav-link px-2 link-light"></a></li>
+                    <li><a href="{% url 'about' %}" class="nav-link px-2 link-light">About the App</a></li>
                     </ul>
                     <div class="text-end">
                         <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">Log In</a>
