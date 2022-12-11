@@ -16,98 +16,105 @@
     <title>Rating</title>
 </head>
 
-<body style="background-image: linear-gradient(to bottom right, rgb(98, 96, 113), rgb(89, 144, 164));">
-    <style>
-        .rating-list li {
-            float: right;
-            color: #ddd;
-            padding: 10px 5px;
-        }
 
-        .rating-list li:hover,
-        .rating-list li:hover~li {
-            color: orange;
-        }
+<style>
+    .rating-list li {
+        float: right;
+        color: #ddd;
+        padding: 10px 5px;
+    }
 
-        .rating-list {
-            display: inline-block;
-            list-style: none;
-        }
+    .rating-list li:hover,
+    .rating-list li:hover~li {
+        color: orange;
+    }
 
-        .checked {
-            color: orange;
-        }
-    </style>
+    .rating-list {
+        display: inline-block;
+        list-style: none;
+    }
 
-    <div class="container mt-5 mb-3">
-        <div class="row">
-            <div class="col-md-4 bg-dark">
-                <div class="card p-3 mb-2 bg-warning">
+    .checked {
+        color: orange;
+    }
+</style>
 
-                    <div class="d-flex flex-row align-items-center">
+<div class="container mt-5 mb-3">
 
-                        <div class="ms-2 c-details">
-                            <h2><span class="font-weight-bold">{{ article.title }} </span> &middot;</h2>
+    <div class="col-md-4 bg-dark">
+        <div class="card p-3 mb-2 bg-warning">
 
-                            <h5 class="card-title">Avg rating:
-                                <span class="fa fa-star {% if article.average_rating > 0 %} checked {% endif %}"></span>
-                                <span class="fa fa-star {% if article.average_rating > 1 %} checked {% endif %}"></span>
-                                <span class="fa fa-star {% if article.average_rating > 2 %} checked {% endif %}"></span>
-                                <span class="fa fa-star {% if article.average_rating > 3 %} checked {% endif %}"></span>
-                                <span class="fa fa-star {% if article.average_rating > 4 %} checked {% endif %}"></span>
-                            </h5>
-                            <form class="review-form" method="GET" action="review">Review This Person
-                                <input type="hidden" name="article_id" id="article_id" value="{{article.id}}" />
-                                <div class="form-group">
-                                    <textarea class="input" type="text" name="comment"
-                                        placeholder="Your Review"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input rating">
-                                        <p class="text-uppercase font-weight-bold">Your Rating: </p>
-                                        <div class="rating-wrapper">
-                                            <ul class="btn btn-light list-inline rating-list">
-                                                <input type="radio" id="star-1" name="rate" value="1" /><label
-                                                    for="star-1" class="fa fa-star"></label>
-                                                <input type="radio" id="star-2" name="rate" value="2" /><label
-                                                    for="star-2" class="fa fa-star"></label>
-                                                <input type="radio" id="star-3" name="rate" value="3" /><label
-                                                    for="star-3" class="fa fa-star"></label>
-                                                <input type="radio" id="star-4" name="rate" value="4" /><label
-                                                    for="star-4" class="fa fa-star"></label>
-                                                <input type="radio" id="star-5" name="rate" value="5" /><label
-                                                    for="star-5" class="fa fa-star"></label>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-danger btn-md m-0" type="submit">Post</button>
-                            </form>
 
+
+            <div class="ms-2 c-details">
+                <h2><span class="font-weight-bold">{{ article.username }} </span> &middot;&nbsp;<img
+                        style='max-width:75px' src="{{article.picture}}" /></h2>
+                <span class="font-weight-bold"> Description: </span>{{article.description}}
+                <hr>
+                {% for review in article.reviews.all %}
+
+                {% endfor %}
+                <h5 class="card-title">Avg rating:
+
+                    <span class="fa fa-star {% if article.average_rating > 0 %} checked {% endif %}"></span>
+                    <span class="fa fa-star {% if article.average_rating > 1 %} checked {% endif %}"></span>
+                    <span class="fa fa-star {% if article.average_rating > 2 %} checked {% endif %}"></span>
+                    <span class="fa fa-star {% if article.average_rating > 3 %} checked {% endif %}"></span>
+                    <span class="fa fa-star {% if article.average_rating > 4 %} checked {% endif %}"></span>
+                </h5>
+
+                <form class="review-form" method="GET" action="review">Review This Person
+                    <input type="hidden" name="article_id" id="article_id" value="{{article.id}}" />
+                    <div class="form-group">
+                        <textarea rows="5" cols="35" class="input" type="text" name="comment"
+                            placeholder="Your Review"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="input rating">
+                            <p class="text-uppercase font-weight-bold">Your Rating: </p>
+                            <div class="rating-wrapper">
+                                <ul class="btn btn-light list-inline rating-list">
+                                    <li><input type="radio" id="star-5" name="rate" value="5" /><label for="star-5"
+                                            class="fa fa-star checked"></label></li>
+                                    <li><input type="radio" id="star-4" name="rate" value="4" /><label for="star-4"
+                                            class="fa fa-star checked"></label></li>
+                                    <li><input type="radio" id="star-3" name="rate" value="3" /><label for="star-3"
+                                            class="fa fa-star checked"></label></li>
+                                    <li><input type="radio" id="star-2" name="rate" value="2" /><label for="star-2"
+                                            class="fa fa-star checked "></label></li>
+                                    <li><input type="radio" id="star-1" name="rate" value="1" /><label for="star-1"
+                                            class="fa fa-star checked"></label></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="mt-5">
-                        <div class="card-body">
-                            <!-- Changes start here! -->
-                            <p></p>
-                            <a href="{% url 'article_edit' article.pk %}">Edit</a> |
-                            <a href="{% url 'article_delete' article.pk %}">Delete</a> |
-                            <a href="{% url 'article_new' %}">Reviews</a>
-
-                        </div>
-                    </div>
-                </div>
+                    <button class="btn btn-danger btn-md m-0" type="submit">Post</button>
+                </form>
 
             </div>
-
         </div>
-        {% endfor %}
-        {% endblock content %}
+        <div class="mt-5">
+            <div class="card-body">
+                <!-- Changes start here! -->
+                <p></p>
+                <a href="{% url 'article_edit' article.pk %}">Edit</a> |
+                <a href="{% url 'article_delete' article.pk %}">Delete</a> |
+                <a href="{% url 'article_new' %}">Reviews</a>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</div>
+{% endfor %}
+{% endblock content %}
 
 
 
 
-        <!--<div class="card">
+<!--<div class="card">
             <div class="card-header">
                 <span class="font-weight-bold">{{ article.title }}</span> &middot;
                 <span class="text-muted">by {{ article.author }}
@@ -126,8 +133,44 @@
             </div>
              -->
 
-    </div>
+</div>
 </body>
+<style>
+    body {
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        height: 100vh;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>
+<div class="d-flex flex-column justify-content-center w-100 h-100">
+
+    <div class="d-flex flex-column justify-content-center align-items-center">
+
+        <div class="btn-group my-5">
+            <a
+                href="https://codepen-api-export-production.s3.us-west-2.amazonaws.com/zip/PEN/pyBNzX/1578778289271/pure-css-gradient-background-animation.zip"></a>
+
+
+
+            </a>
+
+        </div>
+    </div>
 
 </html>
 <br />

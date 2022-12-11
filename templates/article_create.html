@@ -1,0 +1,16 @@
+<!-- templates/article_new.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h1>New Profile</h1>
+<h5>Please type in your Username, a description of yourself and upload a profile picture</h5>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-success ml-2" type="submit">Save</button>
+</form>
+
+{% if img_obj %}
+<h3>Succesfully uploaded : {{img_obj.username}}</h3>
+<img src="{{ img_obj.picture.url}}" alt="connect">
+{% endif %}
+{% endblock content %}

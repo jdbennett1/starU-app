@@ -16,81 +16,121 @@
     <title>Rating</title>
 </head>
 
-<body style="background-image: linear-gradient(to bottom right, rgb(98, 96, 113), rgb(89, 144, 164));">
-    <style>
-        .rating-list li {
-            float: right;
-            color: #ddd;
-            padding: 10px 5px;
+
+
+<style>
+    .rating-list li {
+        float: right;
+        color: #ddd;
+        padding: 10px 5px;
+    }
+
+    .rating-list li:hover,
+    .rating-list li:hover~li {
+        color: orange;
+    }
+
+    .rating-list {
+        display: inline-block;
+        list-style: none;
+    }
+
+    .checked {
+        color: blue;
+    }
+
+    body {
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        height: 100vh;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
         }
 
-        .rating-list li:hover,
-        .rating-list li:hover~li {
-            color: orange;
+        50% {
+            background-position: 100% 50%;
         }
 
-        .rating-list {
-            display: inline-block;
-            list-style: none;
+        100% {
+            background-position: 0% 50%;
         }
+    }
+</style>
+<div class="d-flex flex-column justify-content-center w-100 h-100">
 
-        .checked {
-            color: orange;
-        }
-    </style>
+    <div class="d-flex flex-column justify-content-center align-items-center">
 
-    <div class="container mt-5 mb-3">
-        <div class="row">
-            <div class="col-md-4 bg-dark">
-                <div class="card p-3 mb-2 bg-warning">
+        <div class="btn-group my-5">
+            <a
+                href="https://codepen-api-export-production.s3.us-west-2.amazonaws.com/zip/PEN/pyBNzX/1578778289271/pure-css-gradient-background-animation.zip"></a>
 
-                    <div class="d-flex flex-row align-items-center">
 
-                        <div class="ms-2 c-details">
-                            <h2><span class="font-weight-bold">{{ article.title }} </span> &middot;</h2>
-                            <h3> <span class="text-muted"> </span></h3>
-                            <h5 class="card-title">Avg rating:
-                                <span class="fa fa-star {% if article.average_rating > 0 %} checked {% endif %}"></span>
-                                <span class="fa fa-star {% if article.average_rating > 1 %} checked {% endif %}"></span>
-                                <span class="fa fa-star {% if article.average_rating > 2 %} checked {% endif %}"></span>
-                                <span class="fa fa-star {% if article.average_rating > 3 %} checked {% endif %}"></span>
-                                <span class="fa fa-star {% if article.average_rating > 4 %} checked {% endif %}"></span>
-                            </h5>
 
-                            <div class="card-footer">
-                                {% for review in article.reviews.all %}
-                                <p>
-                                    <span class="font-weight-bold">
-                                        {{review.author}}&middot;{{ review.rate }} Stars &middot;
-                                    </span>
-                                    {{ review.comment }}
-                                    {% endfor %}
-                            </div>
-                        </div>
+            </a>
+
+        </div>
+    </div>
+    <div class="container mt-3 mb-3">
+
+        <div class="col bg-dark">
+            <div class="card p-3 mb-2 bg-warning">
+
+
+
+                <div class="ms-2 c-details">
+                    <h2> <span class="font-weight-bold">Reviews for {{ article.username }} </span> </h2>
+                    <h3> <span class="text-muted"> </span></h3>
+
+                    <div class="card-footer text-left">
+
+                        {% for review in article.reviews.all %}
+                        <p>
+                            <span class="font-weight-bold">
+                                {{review.author}}&middot;</span>
+                            <span class="fa fa-star {% if review.rate  > 0 %} checked {% endif %}"></span>
+                            <span class="fa fa-star {% if review.rate > 1 %} checked {% endif %}"></span>
+                            <span class="fa fa-star {% if review.rate  > 2 %} checked {% endif %}"></span>
+                            <span class="fa fa-star {% if review.rate  > 3 %} checked {% endif %}"></span>
+                            <span class="fa fa-star {% if review.rate  > 4 %} checked {% endif %}"></span>
+
+                            <br>
+
+                            Comment: {{ review.comment }}
+                        </p>
+                        <hr>
+                        {% endfor %}
+
+
                     </div>
-
-                    <div class="card-body">
-                        <!-- Changes start here! -->
-                        <p></p>
-                        <a href="{% url 'article_edit' article.pk %}">Edit</a> |
-                        <a href="{% url 'article_delete' article.pk %}">Delete</a> |
-                        <a href="{% url 'article_list' %}">Back to Profiles</a>
-
-
-                    </div>
-
-
                 </div>
+            </div>
+
+            <div class="card-body">
+                <!-- Changes start here! -->
+                <p></p>
+                <a href="{% url 'article_edit' article.pk %}">Edit</a> |
+                <a href="{% url 'article_delete' article.pk %}">Delete</a> |
+                <a href="{% url 'article_list' %}">Back to Profiles</a>
+
 
             </div>
 
+
         </div>
-        {% endfor %}
-        {% endblock content %}
+
+    </div>
+
+</div>
+{% endfor %}
+{% endblock content %}
 
 
 
-        <!--<div class="card">
+<!--<div class="card">
             <div class="card-header">
                 <span class="font-weight-bold">{{ article.title }}</span> &middot;
                 <span class="text-muted">by {{ article.author }}
@@ -109,7 +149,7 @@
             </div>
              -->
 
-    </div>
+</div>
 </body>
 
 </html>

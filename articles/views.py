@@ -23,8 +23,8 @@ class ArticleDetailView(LoginRequiredMixin, DetailView):  # new
 class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):  # new
     model = Article
     fields = (
-        "title",
-        "body",
+        "username",
+        "description",
     )
     template_name = "article_edit.html"
 
@@ -46,7 +46,11 @@ class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):  #
 class ArticleCreateView(LoginRequiredMixin, ListView):
     model = Article
     template_name = "article_new.html"
-    
+
+class ArticleNewView(LoginRequiredMixin, CreateView):
+    model = Article
+    template_name = "article_create.html"
+    fields = ('username','description','picture')
     
 
     def form_valid(self, form):
@@ -72,7 +76,9 @@ def Review_rate(request):
         article_id = request.GET.get('article_id')
         comment = request.GET.get('comment')
         rate = request.GET.get('rate')
-        author = request.GET.get('author')
+        author = request.user
         Review(article_id=article_id,author=author,comment=comment,rate=rate).save()
         return redirect('article_new')
+
+
    

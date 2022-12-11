@@ -13,6 +13,7 @@
 
 </head>
 
+
 <body>
     <div class="container">
         <header class="p-3 mb-3 border-bottom bg-dark">
@@ -22,13 +23,14 @@
                     <!--<nav class="navbar navbar-dark bg-dark"></nav>
                     <a class="navbar-brand" href="{% url 'home' %}">Star U</a>-->
                     <a href="{% url 'home' %}">
-                        <img src="https://github.com/jdbennett1/starU-app/blob/main/starU.png?raw=true"
+                        <img src="https://github.com/jdbennett1/starU-app/blob/main/starUlogo.png?raw=true"
                             alt="staru logo"></a>
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center
             mb-md-0">
                         {% if user.is_authenticated %}
-                        <li><a href="{% url 'article_new' %}" class="nav-link px-2 link-light">spot</a></li>
+                        <li><a href="{% url 'article_create' %}" class="nav-link px-2 link-light">Create Profile</a>
+                        </li>
                         <!--{% url 'article_new' %}-->
                     </ul>
                     <div class="dropdown text-end">
@@ -43,7 +45,7 @@
                         </ul>
                     </div>
                     {% else %}
-                    <li><a href="#" class="nav-link px-2 link-light">Search Bar Spot</a></li>
+                    <li><a href="#" class="nav-link px-2 link-light"></a></li>
                     </ul>
                     <div class="text-end">
                         <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">Log In</a>
@@ -65,5 +67,41 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 </body>
+<style>
+    body {
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        height: 100vh;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>
+<div class="d-flex flex-column justify-content-center w-100 h-100">
+
+    <div class="d-flex flex-column justify-content-center align-items-center">
+
+        <div class="btn-group my-5">
+            <a
+                href="https://codepen-api-export-production.s3.us-west-2.amazonaws.com/zip/PEN/pyBNzX/1578778289271/pure-css-gradient-background-animation.zip"></a>
+
+
+
+            </a>
+
+        </div>
+    </div>
 
 </html>
