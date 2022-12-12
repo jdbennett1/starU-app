@@ -13,50 +13,8 @@
 
 </head>
 
-
 <body>
-    <div class="container">
-        <header class="p-3 mb-3 border-bottom bg-dark">
-            <div class="container bg-dark">
-                <div class="d-flex flex-wrap align-items-center justify-content-center
-          justify-content-lg-start">
-                    <!--<nav class="navbar navbar-dark bg-dark"></nav>
-                    <a class="navbar-brand" href="{% url 'home' %}">Star U</a>-->
-                    <a href="{% url 'home' %}">
-                        <img src="https://github.com/jdbennett1/starU-app/blob/main/starUlogo.png?raw=true"
-                            alt="staru logo"></a>
-
-                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center
-            mb-md-0">
-                        {% if user.is_authenticated %}
-                        <li><a href="{% url 'article_create' %}" class="nav-link px-2 link-light">Create Profile</a>
-                        <li><a href="{% url 'about' %}" class="nav-link px-2 link-light">About the App</a></li>
-                        </li>
-                        <!--{% url 'article_new' %}-->
-                    </ul>
-                    <div class="dropdown text-end">
-                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle text-white"
-                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ user.username }}
-                        </a>
-                        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="{% url 'password_change'%}">
-                                    Change password</a></li>
-                            <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
-
-                        </ul>
-                    </div>
-                    {% else %}
-                    <li><a href="{% url 'about' %}" class="nav-link px-2 link-light">About the App</a></li>
-                    </ul>
-                    <div class="text-end">
-                        <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">Log In</a>
-                        <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-        </header>
+    {% include 'navbar.html' %}
 
         <main>
             {% block content %}
@@ -69,41 +27,5 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 </body>
-<style>
-    body {
-        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-        background-size: 400% 400%;
-        animation: gradient 15s ease infinite;
-        height: 100vh;
-    }
-
-    @keyframes gradient {
-        0% {
-            background-position: 0% 50%;
-        }
-
-        50% {
-            background-position: 100% 50%;
-        }
-
-        100% {
-            background-position: 0% 50%;
-        }
-    }
-</style>
-<div class="d-flex flex-column justify-content-center w-100 h-100">
-
-    <div class="d-flex flex-column justify-content-center align-items-center">
-
-        <div class="btn-group my-5">
-            <a
-                href="https://codepen-api-export-production.s3.us-west-2.amazonaws.com/zip/PEN/pyBNzX/1578778289271/pure-css-gradient-background-animation.zip"></a>
-
-
-
-            </a>
-
-        </div>
-    </div>
 
 </html>

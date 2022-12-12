@@ -80,5 +80,11 @@ def Review_rate(request):
         Review(article_id=article_id,author=author,comment=comment,rate=rate).save()
         return redirect('article_new')
 
-
+def search_user(request):
+    if request.method == "POST":
+        searched = request.POST.get('searched')
+        #users = Article.objects.all(username__contains = searched)
+        users = Article.objects.filter(username__contains = searched)
+        return render(request, 'search_user.html',{'searched': searched, 'users': users })
+    
    

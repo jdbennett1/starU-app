@@ -1,0 +1,134 @@
+{% extends 'base.html'%}
+
+{% block title %}Articles{% endblock title %}
+{% block content %}
+</br></br></br></br></br></br></br></br></br>
+
+{% if searched %}
+    {% for user in users%}
+        <html lang="en">
+
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+                integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <meta charset="UTF-8">
+            <title>Rating</title>
+        </head>
+        
+        <style>
+            .rating-list li {
+                float: right;
+                color: #ddd;
+                padding: 10px 5px;
+            }
+        
+            .rating-list li:hover,
+            .rating-list li:hover~li {
+                color: orange;
+            }
+        
+            .rating-list {
+                display: inline-block;
+                list-style: none;
+            }
+        
+            .checked {
+                color: orange;
+            }
+        </style>
+        
+        
+        <div class="container mt-5 mb-3">
+
+            <div class="col-md-4 bg-dark">
+                <div class="card p-3 mb-2 bg-warning">
+        
+        
+        
+                    <div class="ms-2 c-details">
+                        <h2><span class="font-weight-bold">{{ user }} </span> &middot;&nbsp;<img
+                            style='max-width:75px' src="{{article.picture}}" /></h2>
+                            <span class="font-weight-bold"> Description: </span>{{user.description}}<hr>
+        
+                            <form class="review-form" method="GET" action="review">Review This Person
+                                <input type="hidden" name="article_id" id="article_id" value="{{article.id}}" />
+                                <div class="form-group">
+                                    <textarea rows="5" cols="35" class="input" type="text" name="comment"
+                                        placeholder="Your Review"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input rating">
+                                        <p class="text-uppercase font-weight-bold">Your Rating: </p>
+                                        <div class="rating-wrapper">
+                                            <ul class="btn btn-light list-inline rating-list">
+                                                <li><input type="radio" id="star-5" name="rate" value="5" /><label for="star-5"
+                                                        class="fa fa-star checked"></label></li>
+                                                <li><input type="radio" id="star-4" name="rate" value="4" /><label for="star-4"
+                                                        class="fa fa-star checked"></label></li>
+                                                <li><input type="radio" id="star-3" name="rate" value="3" /><label for="star-3"
+                                                        class="fa fa-star checked"></label></li>
+                                                <li><input type="radio" id="star-2" name="rate" value="2" /><label for="star-2"
+                                                        class="fa fa-star checked "></label></li>
+                                                <li><input type="radio" id="star-1" name="rate" value="1" /><label for="star-1"
+                                                        class="fa fa-star checked"></label></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-danger btn-md m-0" type="submit">Post</button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+{% else %}
+    <h1>hey! thats not a user!</h1>
+{% endif %}
+
+
+{% endblock %}
+
+</div>
+</body>
+<style>
+    body {
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        height: 100vh;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>
+<div class="d-flex flex-column justify-content-center w-100 h-100">
+
+    <div class="d-flex flex-column justify-content-center align-items-center">
+
+        <div class="btn-group my-5">
+            <a
+                href="https://codepen-api-export-production.s3.us-west-2.amazonaws.com/zip/PEN/pyBNzX/1578778289271/pure-css-gradient-background-animation.zip"></a>
+
+
+
+            </a>
+
+        </div>
+    </div>
+
+</html>
+<br />

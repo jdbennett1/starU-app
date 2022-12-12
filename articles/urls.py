@@ -21,5 +21,6 @@ urlpatterns = [
     path("", views.ArticleListView.as_view(), name="article_list"),
     #path('rate/<int:post_id>/<int:rating>/', views.rate),
     #path('', index),
-    path('review', views.Review_rate, name='review')
+    path('review', views.Review_rate, name='review'),
+    path('search_user',views.search_user,name= 'search_user'),
 ] 
