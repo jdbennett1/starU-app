@@ -19,6 +19,7 @@ urlpatterns = [
     path("new/", views.ArticleCreateView.as_view(), name="article_new"),  # new
     path("create/", views.ArticleNewView.as_view(), name="article_create"), 
     path("", views.ArticleListView.as_view(), name="article_list"),
-    
-    path('review/', views.Review_rate, name='review')
+    #path('rate/<int:post_id>/<int:rating>/', views.rate),
+    #path('', index),
+    path('review', views.Review_rate, name='review')
 ] 
