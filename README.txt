@@ -7,3 +7,5 @@ The application also has a search mechanic which allows for easier searching of 
 be posted in the reviews section where all reviews will be seen with their star rating and complete reviews made by others. 
 Additional features that were added to the project were a star rating, search bar, and image uploader. while being a simple application,
 Star U accomplishes what it was intended to do. 
+
+live app link:https://staru-jd.herokuapp.com/
